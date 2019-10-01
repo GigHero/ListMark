@@ -1,0 +1,33 @@
+{
+  "name": "declaracoes-prova",
+  "version": "1.0.0",
+  "description": "### Desenvolvimento Web 2 - Prof. Eduardo P de Sousa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edupsousa/dw2-declaracoes-prova.git"
+  },
+  "author": "Eduardo P de Sousa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edupsousa/dw2-declaracoes-prova/issues"
+  },
+  "homepage": "https://github.com/edupsousa/dw2-declaracoes-prova#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "debug": "^4.1.1",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "sequelize": "^5.18.1",
+    "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "sequelize-cli": "^5.5.1"
+  }
+}

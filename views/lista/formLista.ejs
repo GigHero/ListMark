@@ -1,0 +1,11 @@
+<form action="<%= formAction %>" method="post">
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome" class="form-control" value="<%= lista.nome %>" />
+  </div>
+  <div class="form-group">
+    <label for="data">Data</label>
+    <input type="date" name="data" id="data" class="form-control" value="<%= lista.data %>" />
+  </div>
+  <button class="btn btn-primary" type="submit">Salvar item</button>
+</form>

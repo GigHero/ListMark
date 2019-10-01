@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../includes/head.ejs') %>
+
+<body>
+  <%- include('../includes/navbar.ejs') %>
+  <section class="container">
+    <h1>Listas Cadastradas</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Nome</td>
+          <td>Lista</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let lista of listas) { %>
+        <tr>
+          <td><%= lista.nome %></td>
+          <td><%= lista.data %></td>
+          <td>
+            <a href="/lista/editar/<%= lista.id %>" class="btn btn-outline-secondary btn-sm">Editar</a>
+            <form class="deleteForm" method="POST" action="/lista/excluir/<%= lista.id %>"
+              style="display: inline-block;">
+              <input type="hidden" name="listaId" value="<%= lista.id %>">
+              <button type="submit" href="/lista/excluir/<%= lista.id %>"
+                class="btn btn-sm btn-outline-danger">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <div class="row justify-content-end">
+      <a class="btn btn-outline-primary" href="/lista/nova">Novo listas</a>
+    </div>
+  </section>
+  <%- include('../includes/scripts.ejs') %>
+  <script>
+    jQuery(function ($) {
+      $('form.deleteForm').submit(function (event) {
+        var response = confirm('Confirma a exclusão? Essa operação não poderá ser desfeita!');
+        if (!response)
+          event.preventDefault();
+      });
+    });
+  </script>
+</body>
+
+</html>

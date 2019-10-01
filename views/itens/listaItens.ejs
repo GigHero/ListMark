@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../includes/head.ejs') %>
+
+<body>
+  <%- include('../includes/navbar.ejs') %>
+  <section class="container">
+    <h1>Itens Cadastrados</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Nome</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let item of itens) { %>
+        <tr>
+          <td><%= item.nome %></td>
+          <td>
+            <a href="/itens/editar/<%= item.id %>" class="btn btn-outline-secondary btn-sm">Editar</a>
+            <form class="deleteForm" method="POST" action="/itens/excluir/<%= item.id %>"
+              style="display: inline-block;">
+              <input type="hidden" name="itemId" value="<%= item.id %>">
+              <button type="submit" href="/itens/excluir/<%= item.id %>"
+                class="btn btn-sm btn-outline-danger">Excluir</button>
+            </form>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <div class="row justify-content-end">
+      <a class="btn btn-outline-primary" href="/itens/nova">Novo Itens</a>
+    </div>
+  </section>
+  <%- include('../includes/scripts.ejs') %>
+  <script>
+    jQuery(function ($) {
+      $('form.deleteForm').submit(function (event) {
+        var response = confirm('Confirma a exclusão? Essa operação não poderá ser desfeita!');
+        if (!response)
+          event.preventDefault();
+      });
+    });
+  </script>
+</body>
+
+</html>

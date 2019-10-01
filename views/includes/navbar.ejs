@@ -1,0 +1,25 @@
+<% linkAtivo = (typeof linkAtivo != 'undefined' ? linkAtivo : 'index') %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Deckarações de Prova</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-lista <%= linkAtivo === 'listas' ? 'active' : '' %>">
+        <a class="nav-link" href="/lista">Listas</a>
+      </li>
+      <li class="nav-lista <%= linkAtivo === 'itens' ? 'active' : '' %>">
+        <a class="nav-link" href="/itens">Itens</a>
+      </li>
+    </ul>
+  </div>
+</nav>
