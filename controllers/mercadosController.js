@@ -1,14 +1,15 @@
 const Mercado = require('../db').Mercado;
 
-exports.postNovaMercado = (req, res, next) => {
+
+exports.postNovoMercado = (req, res, next) => {
   Mercado.create(req.body)
     .then((mercado) => {
       res.redirect('/mercado');
     }).catch(console.error);
 };
 
-exports.getNovaMercado = (req, res, next) => {
-  res.render('mercado/novaMercado', {
+exports.getNovoMercado = (req, res, next) => {
+  res.render('mercado/novoMercado', {
     linkAtivo: 'mercado',
     formAction: '/mercado/nova',
     mercado: Mercado.build({}),
@@ -19,7 +20,7 @@ exports.getMercados = (req, res, next) => {
   Mercado.findAll().then(mercados => {
     res.render('mercado/listaMercados', {
       linkAtivo: 'mercados',
-      mercado: mercado
+      mercados: mercados
     });
   }).catch(console.error);
 };
@@ -27,9 +28,9 @@ exports.getMercados = (req, res, next) => {
 exports.getEditarMercado = (req, res, next) => {
   let mercadoId = req.params.mercadoId;
   Mercado.findByPk(mercadoId).then(mercado => {
-    res.render('mercado/editarMercado', {
-      linkAtivo: 'mercado',
-      formAction: '/mercado/editar/' + MercadoId,
+    res.render('mercados/editarMercados', {
+      linkAtivo: 'mercados',
+      formAction: '/mercados/editar/' + mercadoId,
       mercado: mercado
     });
   }).catch(console.error);
