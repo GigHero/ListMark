@@ -20,7 +20,8 @@ app.use('/mercados', mercadosRouter);
 
 app.get('/', (req, res, next) => {
   res.render('site/index', {
-    titulo: 'Gerador de Declarações de Prova'
+    titulo: 'Vai uma ajuda aí?',
+    corpo: "Olá! Bem vindo(a) ao MarkList! Aqui seu dinheiro vale mais! Te oferecemos uma plataforma para gerenciamento de suas compras onde você poderá ver os melhores preços, onde comprar e fará uma bela economia no final do mês! Quer tentar a 'sorte'? Então vai que é sua! Abaixo está uma breve explicação de como utilizar a plataforma, não se assuste, é tão fácil que até a minha vó consegue aprender, certamente você se sairá bem ;)"
   });
 });
 

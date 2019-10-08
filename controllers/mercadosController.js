@@ -9,7 +9,7 @@ exports.postNovoMercado = (req, res, next) => {
 
 exports.getNovoMercado = (req, res, next) => {
   res.render('mercado/novaMercado', {
-    linkAtivo: 'mercado',
+    linkAtivo: 'mercados',
     formAction: '/mercados/novo',
     mercado: Mercado.build({}),
   });
