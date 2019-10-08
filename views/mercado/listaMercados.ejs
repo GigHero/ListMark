@@ -6,26 +6,24 @@
 <body>
   <%- include('../includes/navbar.ejs') %>
   <section class="container">
-    <h1>Listas Cadastradas</h1>
+    <h1>Mercados Cadastrados</h1>
     <table class="table table-striped">
       <thead>
         <tr>
           <td>Nome</td>
-          <td>Lista</td>
           <td></td>
         </tr>
       </thead>
       <tbody>
-        <% for (let lista of listas) { %>
+        <% for (let mercado of mercados) { %>
         <tr>
-          <td><%= lista.nome %></td>
-          <td><%= lista.dataFormatada %></td>
+          <td><%= mercado.nome %></td>
           <td>
-            <a href="/listas/editar/<%= lista.id %>" class="btn btn-outline-secondary btn-sm">Editar</a>
-            <form class="deleteForm" method="POST" action="/lista/excluir/<%= lista.id %>"
+            <a href="/mercados/editar/<%= mercado.id %>" class="btn btn-outline-secondary btn-sm">Editar</a>
+            <form class="deleteForm" method="POST" action="/mercado/excluir/<%= mercado.id %>"
               style="display: inline-block;">
-              <input type="hidden" name="listaId" value="<%= lista.id %>">
-              <button type="submit" href="/listas/excluir/<%= lista.id %>"
+              <input type="hidden" name="mercadoId" value="<%= mercado.id %>">
+              <button type="submit" href="/mercado/excluir/<%= mercado.id %>"
                 class="btn btn-sm btn-outline-danger">Excluir</button>
             </form>
           </td>
@@ -34,7 +32,7 @@
       </tbody>
     </table>
     <div class="row justify-content-end">
-      <a class="btn btn-outline-primary" href="/listas/nova">Novo listas</a>
+      <a class="btn btn-outline-primary" href="/mercados/novo">Novo Mercado</a>
     </div>
   </section>
   <%- include('../includes/scripts.ejs') %>

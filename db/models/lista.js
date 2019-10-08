@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.STRING, primaryKey: true, allowNull: false, autoIncrement: true },
     nome: { type: DataTypes.STRING, allowNull: false, validate: { notEmpty: true } },
     data: {type: DataTypes.DATE, allowNull: false, validate: { notEmpty: true } },
-    data: {
+    dataFormatada: {
       type: DataTypes.VIRTUAL,
       get() {
         let date = moment(this.getDataValue('data'));

@@ -3,14 +3,14 @@ const Lista = require('../db').Lista;
 exports.postNovaLista = (req, res, next) => {
   Lista.create(req.body)
     .then((lista) => {
-      res.redirect('/lista');
+      res.redirect('/listas');
     }).catch(console.error);
 };
 
 exports.getNovaLista = (req, res, next) => {
   res.render('lista/novaLista', {
     linkAtivo: 'lista',
-    formAction: '/lista/nova',
+    formAction: '/listas/nova',
     lista: Lista.build({}),
   });
 };
@@ -29,7 +29,7 @@ exports.getEditarLista = (req, res, next) => {
   Lista.findByPk(listaId).then(lista => {
     res.render('lista/editarListas', {
       linkAtivo: 'listas',
-      formAction: '/lista/editar/' + listaId,
+      formAction: '/listas/editar/' + listaId,
       lista: lista
     });
   }).catch(console.error);
@@ -40,7 +40,7 @@ exports.postExcluirLista = (req, res, next) => {
   Lista.findByPk(listaId).then(lista => {
     return lista.destroy();
   }).then(() => {
-    res.redirect('/lista');
+    res.redirect('/listas');
   }).catch(console.error);
 };
 
@@ -48,7 +48,7 @@ exports.postEditarLista = (req, res, next) => {
   let listaId = req.params.listaId;
   Lista.findByPk(listaId).then(lista => {
     lista.update(req.body).then(() => {
-      res.redirect('/lista');
+      res.redirect('/listas');
     });
   }).catch(console.error);
 };
