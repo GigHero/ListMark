@@ -19,13 +19,13 @@
         <% for (let lista of listas) { %>
         <tr>
           <td><%= lista.nome %></td>
-          <td><%= lista.data %></td>
+          <td><%= lista.dataFormatada %></td>
           <td>
-            <a href="/lista/editar/<%= lista.id %>" class="btn btn-outline-secondary btn-sm">Editar</a>
+            <a href="/listas/editar/<%= lista.id %>" class="btn btn-outline-secondary btn-sm">Editar</a>
             <form class="deleteForm" method="POST" action="/lista/excluir/<%= lista.id %>"
               style="display: inline-block;">
               <input type="hidden" name="listaId" value="<%= lista.id %>">
-              <button type="submit" href="/lista/excluir/<%= lista.id %>"
+              <button type="submit" href="/listas/excluir/<%= lista.id %>"
                 class="btn btn-sm btn-outline-danger">Excluir</button>
             </form>
           </td>
@@ -34,7 +34,7 @@
       </tbody>
     </table>
     <div class="row justify-content-end">
-      <a class="btn btn-outline-primary" href="/lista/nova">Novo listas</a>
+      <a class="btn btn-outline-primary" href="/listas/nova">Novo listas</a>
     </div>
   </section>
   <%- include('../includes/scripts.ejs') %>

@@ -1,17 +1,16 @@
 const Mercado = require('../db').Mercado;
 
-
 exports.postNovoMercado = (req, res, next) => {
   Mercado.create(req.body)
     .then((mercado) => {
-      res.redirect('/mercado');
+      res.redirect('/mercados');
     }).catch(console.error);
 };
 
 exports.getNovoMercado = (req, res, next) => {
-  res.render('mercado/novoMercado', {
-    linkAtivo: 'mercado',
-    formAction: '/mercado/nova',
+  res.render('mercado/novaMercado', {
+    linkAtivo: 'mercados',
+    formAction: '/mercados/novo',
     mercado: Mercado.build({}),
   });
 };
@@ -28,7 +27,7 @@ exports.getMercados = (req, res, next) => {
 exports.getEditarMercado = (req, res, next) => {
   let mercadoId = req.params.mercadoId;
   Mercado.findByPk(mercadoId).then(mercado => {
-    res.render('mercados/editarMercados', {
+    res.render('mercado/editarMercados', {
       linkAtivo: 'mercados',
       formAction: '/mercados/editar/' + mercadoId,
       mercado: mercado
@@ -41,7 +40,7 @@ exports.postExcluirMercado = (req, res, next) => {
   Mercado.findByPk(mercadoId).then(mercado => {
     return mercado.destroy();
   }).then(() => {
-    res.redirect('/mercado');
+    res.redirect('/mercados');
   }).catch(console.error);
 };
 
@@ -49,7 +48,7 @@ exports.postEditarMercado = (req, res, next) => {
   let mercadoId = req.params.mercadoId;
   Mercado.findByPk(mercadoId).then(mercado => {
     mercado.update(req.body).then(() => {
-      res.redirect('/mercado');
+      res.redirect('/mercados');
     });
   }).catch(console.error);
 };

@@ -10,10 +10,12 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 /**@type {Sequelize.Model} */
 const Item = sequelize.import(__dirname + '/models/item.js');
 const Lista = sequelize.import(__dirname + '/models/lista.js');
+const Mercado = sequelize.import(__dirname + '/models/mercado.js');
 
 module.exports = {
   Sequelize,
   sequelize,
   Item,
   Lista,
+  Mercado,
 };
