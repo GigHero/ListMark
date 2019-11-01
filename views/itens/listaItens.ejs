@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <td>Nome</td>
+          <td>Unidade de Medida</td>
           <td></td>
         </tr>
       </thead>
@@ -18,6 +19,7 @@
         <% for (let item of itens) { %>
         <tr>
           <td><%= item.nome %></td>
+          <td><%= item.unidadeMedida %></td>
           <td>
             <a href="/itens/editar/<%= item.id %>" class="btn btn-outline-secondary btn-sm">Editar</a>
             <form class="deleteForm" method="POST" action="/itens/excluir/<%= item.id %>"

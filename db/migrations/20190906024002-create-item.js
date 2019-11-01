@@ -11,6 +11,10 @@ module.exports = {
       nome: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      unidadeMedida: {
+        type: Sequelize.STRING,
+        allowNull: true
       }
     });
   },

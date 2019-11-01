@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {tableName: 'Lista',timestamps: false});
   Lista.associate = function(models) {
-    // associations can be defined here
+    Lista.belongsToMany(models.Mercado, {through: 'Compra', foreignKey: 'idLista', as: 'Mercados'})
   };
   return Lista;
 };
