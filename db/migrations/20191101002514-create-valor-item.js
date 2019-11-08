@@ -26,14 +26,6 @@ module.exports = {
       },
       preco: {
         type: Sequelize.DECIMAL(10,2)
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },

@@ -11,6 +11,8 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 const Item = sequelize.import(__dirname + '/models/item.js');
 const Lista = sequelize.import(__dirname + '/models/lista.js');
 const Mercado = sequelize.import(__dirname + '/models/mercado.js');
+const Compra = sequelize.import(__dirname + '/models/compra.js');
+const ValorItem = sequelize.import(__dirname + '/models/valoritem.js');
 
 module.exports = {
   Sequelize,
@@ -18,4 +20,6 @@ module.exports = {
   Item,
   Lista,
   Mercado,
+  Compra,
+  ValorItem,
 };

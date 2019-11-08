@@ -1,6 +1,8 @@
 const Compra = require('../db').Compra;
+const Mercado = require('../db').Mercado;
+const Lista = require('../db').Lista;
 
-exports.postNovaCompra = (req, res, next) => {
+exports.postNovoCompra = (req, res, next) => {
   Compra.create(req.body)
     .then((compra) => {
       res.redirect('/compras');
@@ -8,16 +10,16 @@ exports.postNovaCompra = (req, res, next) => {
 };
 
 exports.getNovoCompra = (req, res, next) => {
-  res.render('compra/novaCompra', {
+  res.render('compras/novoCompra', {
     linkAtivo: 'compras',
-    formAction: '/compras/novo',
+    formAction: '/compras/nova',
     compra: Compra.build({}),
   });
 };
 
 exports.getCompras = (req, res, next) => {
-  Compra.findAll().then(compras => {
-    res.render('compra/listaCompras', {
+  Item.findAll().then(compras => {
+    res.render('compras/listaCompras', {
       linkAtivo: 'compras',
       compras: compras
     });
@@ -27,7 +29,7 @@ exports.getCompras = (req, res, next) => {
 exports.getEditarCompra = (req, res, next) => {
   let compraId = req.params.compraId;
   Compra.findByPk(compraId).then(compra => {
-    res.render('compra/editarCompras', {
+    res.render('compras/editarCompras', {
       linkAtivo: 'compras',
       formAction: '/compras/editar/' + compraId,
       compra: compra
@@ -37,7 +39,7 @@ exports.getEditarCompra = (req, res, next) => {
 
 exports.postExcluirCompra = (req, res, next) => {
   let compraId = req.body.compraId;
-  Compra.findByPk(compraId).then(compra => {
+  compra.findByPk(compraId).then(compra => {
     return compra.destroy();
   }).then(() => {
     res.redirect('/compras');

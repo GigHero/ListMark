@@ -1,6 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Compra = sequelize.define('Compra', {
+    id: { type: DataTypes.STRING, primaryKey: true, allowNull: false, autoIncrement: true },
     idLista: DataTypes.INTEGER,
     idMercado: DataTypes.INTEGER
   }, {});

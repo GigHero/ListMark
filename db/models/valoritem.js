@@ -1,6 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const ValorItem = sequelize.define('ValorItem', {
+    id: { type: DataTypes.STRING, primaryKey: true, allowNull: false, autoIncrement: true },
     idCompra: DataTypes.INTEGER,
     idItem: DataTypes.INTEGER,
     quantidade: DataTypes.INTEGER,
