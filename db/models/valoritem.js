@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     idItem: DataTypes.INTEGER,
     quantidade: DataTypes.INTEGER,
     preco: DataTypes.DECIMAL
-  }, {});
+  }, {timestamps: false});
   ValorItem.associate = function(models) {
     ValorItem.belongsTo(models.Compra, {foreignKey: 'idCompra'})
     ValorItem.belongsTo(models.Item, {foreignKey: 'idItem'})

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('../includes/head.ejs') %>
+
+<body>
+  <%- include('../includes/navbar.ejs') %>
+  <section class="container">
+    <h1>Itens Cadastrados</h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <td>Nome</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let lista of listas) { %>
+        <tr>
+          <td><%= lista.nome %></td>
+          <td>
+            <a href="/itens/editar/<%= lista.id %>" class="btn btn-outline-secondary btn-sm" aria-disabled="true">Editar</a>
+            <a href="compras/Listas/<%= lista.id %>" class="btn btn-outline-secondary btn-sm" aria-disabled="true">Acessar</a>
+            <form class="deleteForm" method="POST" action="/itens/excluir/<%= lista.id %>"
+              style="display: inline-block;">
+              <input type="hidden" name="listaId" value="<%= lista.id %>">
+              <button type="submit" href="/itens/excluir/<%= lista.id %>"
+                class="btn btn-sm btn-outline-danger" disabled>Excluir</button>
+            </form>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <div class="row justify-content-end">
+      <a class="btn btn-outline-primary" href="/itens/nova" aria-disabled="true">Novo Itens</a>
+    </div>
+  </section>
+  <%- include('../includes/scripts.ejs') %>
+  <script>
+    jQuery(function ($) {
+      $('form.deleteForm').submit(function (event) {
+        var response = confirm('Confirma a exclusão? Essa operação não poderá ser desfeita!');
+        if (!response)
+          event.preventDefault();
+      });
+    });
+  </script>
+</body>
+
+</html>

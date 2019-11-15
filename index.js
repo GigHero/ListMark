@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const itensRouter = require('./routes/itensRouter');
 const listasRouter = require('./routes/listasRouter');
 const mercadosRouter = require('./routes/mercadosRouter');
+const comprasRouter = require('./routes/comprasRouter');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/listas', listasRouter);
 app.use('/itens', itensRouter);
 app.use('/mercados', mercadosRouter);
+app.use('/compras', comprasRouter);
 
 app.get('/', (req, res, next) => {
   res.render('site/index', {
