@@ -11,6 +11,6 @@ router.get('/novo', comprasTesteController.getNovaCompra);
 router.get('/', comprasTesteController.getListasCompras);
 router.get('/Listas', comprasTesteController.getListasCompras);
 router.get('/Listas/:listaId', comprasTesteController.getMercadosCompras);
-router.get('/Listas/:listaId/Mercados/:mercadoId', comprasTesteController.getItensCompras);
+router.get('/Listas/Mercados/:compraId', comprasTesteController.getItensCompras);
 
 module.exports = router;

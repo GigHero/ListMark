@@ -4,11 +4,11 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.STRING, primaryKey: true, allowNull: false, autoIncrement: true },
     idLista: DataTypes.INTEGER,
     idMercado: DataTypes.INTEGER,
-  }, {timestamps: false});
+  }, {freezeTableName: true ,timestamps: false});
   Compra.associate = function(models)  {
-    Compra.belongsTo(models.Lista, {foreignKey: 'idLista'})
-    Compra.belongsTo(models.Mercado, {foreignKey: 'idMercado'})
-    Compra.belongsToMany(models.Item, {through: 'ValorItem', foreignKey: 'idCompra', as: 'ItensValor'})
+    Compra.belongsTo(models.lista, {foreignKey: 'idLista'})
+    Compra.belongsTo(models.mercado, {foreignKey: 'idMercado'})
+    Compra.belongsToMany(models.item, {through: 'ValorItem', foreignKey: 'idCompra', as: 'ItensValor'})
   };
   return Compra;
 };

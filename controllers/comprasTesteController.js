@@ -21,7 +21,9 @@ exports.postNovaCompra = (req, res, next) => {
       return ValorItem.create(valorItem)
     }).then(function(valorItemSalvo){
       res.redirect('/compras');
-    });
+    }).catch(function(e) {
+      console.error(e);
+    })
 };
 
 exports.getNovaCompra = (req, res, next) => {
@@ -46,10 +48,10 @@ exports.getCompras = (req, res, next) => {
   Compra.findAll({
     include: [
       {
-        model: Lista,
+        model: Lista,// as: 'Listas',
         include: [
           {
-            model: Mercado
+            model: Mercado, as: 'Mercados'
           }
         ]
       }
@@ -138,21 +140,19 @@ exports.getMercadosCompras = (req, res, next) => {
   Compra.findAll({
     include: [
       {
-        model: Lista,
-        include: [
-          {
-            model: Mercado
-          }
-        ]
+        model: Lista, as: 'lista',
+      },
+      {
+        model: Mercado, as: 'mercado'
       }
     ],
     where: {
       idLista: req.params.listaId
     }
-  }).then(mercados => {
+  }).then(compras => {
     res.render('compra/listamercados', {
       linkAtivo: 'compras',
-      mercados: mercados
+      compras: compras
     });
   }).catch(console.error);
 };
@@ -160,20 +160,14 @@ exports.getMercadosCompras = (req, res, next) => {
 //---------------------------------------------Seção de controle de Itens e valor dentro de compras-----------------------------
 
 exports.getItensCompras = (req, res, next) => {
-  Compra.findAll({
+  ValorItem.findAll({
     include: [
       {
-        model: Lista,
-        include: [
-          {
-            model: Mercado
-          }
-        ]
-      }
+        model: Item, as: 'itemCompra',
+      },
     ],
     where: {
-      idLista: req.params.listaId,
-      idMercado: req.params.mercadoId
+      idCompra: req.params.compraId
     }
   }).then(itens => {
     res.render('compra/listaItens', {

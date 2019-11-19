@@ -6,20 +6,26 @@
 <body>
   <%- include('../includes/navbar.ejs') %>
   <section class="container">
-    <h1>Itens Cadastrados</h1>
+    <h1>Produtos</h1>
     <table class="table table-striped">
       <thead>
         <tr>
           <td>Nome</td>
           <td>Unidade de Medida</td>
+          <td>Quantidade</td>
+          <td>Preço Unitário</td>
+          <td>Preço Total</td>
           <td></td>
         </tr>
       </thead>
       <tbody>
         <% for (let item of itens) { %>
         <tr>
-          <td><%= item.nome %></td>
-          <td><%= item.unidadeMedida %></td>
+          <td><%= item.itemCompra.nome %></td>
+          <td><%= item.itemCompra.unidadeMedida %></td>
+          <td><%= item.quantidade %></td>
+          <td>R$ <%= item.preco%></td>
+          <td>R$ <%= item.preco*item.quantidade%></td>
           <td>
             <a href="/itens/editar/<%= item.id %>" class="btn btn-outline-secondary btn-sm">Editar</a>
             <form class="deleteForm" method="POST" action="/itens/excluir/<%= item.id %>"

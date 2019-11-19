@@ -13,9 +13,10 @@ module.exports = (sequelize, DataTypes) => {
         return date.format('DD/MM/YYYY');
       }
     }
-  }, {tableName: 'Lista',timestamps: false});
+  }, {freezeTableName: true ,timestamps: false});
   Lista.associate = function(models) {
-    Lista.belongsToMany(models.Mercado, {through: 'Compra', foreignKey: 'idLista', as: 'Mercados'})
+    Lista.belongsToMany(models.mercado, {through: 'Compra', foreignKey: 'idLista', as: 'Mercados'})
+    Lista.belongsTo(models.compra, {foreignKey: 'idLista'})
   };
   return Lista;
 };

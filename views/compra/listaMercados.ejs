@@ -6,7 +6,7 @@
 <body>
   <%- include('../includes/navbar.ejs') %>
   <section class="container">
-    <h1>Itens Cadastrados</h1>
+    <h1>Mercados</h1>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -15,17 +15,17 @@
         </tr>
       </thead>
       <tbody>
-        <% for (let compra of mercados) { %>
+        <% for (let compra of compras) { %>
         <tr>
           <td><%= compra.mercado.nome %></td>
           <td>
-            <a href="/itens/editar/<%= item.id %>" class="btn btn-outline-secondary btn-sm" aria-disabled="true">Editar</a>
-            <a href="compras/Listas/<%= compra.lista.id %>/Mercados/<%= compra.mercado.id %>" class="btn btn-outline-secondary btn-sm" aria-disabled="true">Acessar</a>
-            <form class="deleteForm" method="POST" action="/itens/excluir/<%= item.id %>"
+            <a href="/mercados/editar/<%= compra.mercado.id %>" class="btn btn-outline-secondary btn-sm" aria-disabled="true">Editar</a>
+            <a href="/compras/Listas/Mercados/<%= compra.id %>" class="btn btn-outline-secondary btn-sm" aria-disabled="true">Acessar</a>
+            <form class="deleteForm" method="POST" action="compras/excluir/<%= compra.id %>"
               style="display: inline-block;">
-              <input type="hidden" name="itemId" value="<%= item.id %>">
-              <button type="submit" href="/itens/excluir/<%= item.id %>"
-                class="btn btn-sm btn-outline-danger" disabled>Excluir</button>
+              <input type="hidden" name="mercadoId" value="<%= compra.id %>">
+              <button type="submit" href="compras/excluir/<%= compra.id %>"
+                class="btn btn-sm btn-outline-danger" >Excluir</button>
             </form>
           </td>
         </tr>
