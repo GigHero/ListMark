@@ -20,9 +20,14 @@ exports.postNovaCompra = (req, res, next) => {
       }
       return ValorItem.create(valorItem)
     }).then(function(valorItemSalvo){
-      res.redirect('/compras');
+      res.json({
+        funcionou: true
+      });
     }).catch(function(e) {
       console.error(e);
+      res.json({
+        funcionou: false
+      });
     })
 };
 
@@ -30,7 +35,7 @@ exports.getNovaCompra = (req, res, next) => {
   Lista.findAll().then(listas=>{
     return Mercado.findAll().then(mercados=>{
       return Item.findAll().then(itens=>{
-        res.render('compra/novaCompra', {
+        res.json({
           linkAtivo: 'compras',
           formAction: '/compras/novo',
           compra: Compra.build({}),
@@ -57,7 +62,7 @@ exports.getCompras = (req, res, next) => {
       }
     ]
   }).then(compras => {
-    res.render('compra/listaCompras', {
+    res.json({
       linkAtivo: 'compras',
       compras: compras
     });
@@ -71,7 +76,7 @@ exports.getValorItens = (req, res, next) => {
       idCompra: req.params.idCompra
     }
   }).then(itens => {
-    res.render('compra/listaValorItens', {
+    res.json({
       linkAtivo: 'compras',
       itens: itens
     });
@@ -84,7 +89,7 @@ exports.getEditarCompra = (req, res, next) => {
     return Lista.findAll().then(listas=>{
       return Mercado.findAll().then(mercados=>{
         return Item.findAll().then(itens=>{
-          res.render('compra/editarCompras', {
+          res.json({
             linkAtivo: 'compras',
             formAction: '/compras/editar/' + compraId,
             compra: compra,
@@ -109,24 +114,38 @@ exports.postExcluirCompra = (req, res, next) => {//Ao excluir a compra tambem te
       return compra.destroy();
     })
   }).then(() => {
-    res.redirect('/compras');
-  }).catch(console.error);
-};//a fazer
+    res.json({
+      funcionou: true
+    });
+  }).catch(function(e) {  
+    console.error(e);
+    res.json({
+      funcionou: false
+    });
+  });//a fazer
+}
 
 
 exports.postEditarCompra = (req, res, next) => {
   let itemId = req.params.itemId;
   Item.findByPk(itemId).then(item => {
     item.update(req.body).then(() => {
-      res.redirect('/itens');
-    });
-  }).catch(console.error);
-};
+      res.json({
+        funcionou: true
+      });
+    }).catch(function(e) {
+      console.error(e);
+      res.json({
+        funcionou: false
+      })
+    })
+  })
+}
 //---------------------------------------------Seção de controle de Lista dentro de compras-----------------------------
 
 exports.getListasCompras = (req, res, next) => {
   Lista.findAll().then(listas => {
-    res.render('compra/listaListas', {
+    res.json({
       linkAtivo: 'compras',
       listas: listas
     });
@@ -150,7 +169,7 @@ exports.getMercadosCompras = (req, res, next) => {
       idLista: req.params.listaId
     }
   }).then(compras => {
-    res.render('compra/listamercados', {
+    res.json({
       linkAtivo: 'compras',
       compras: compras
     });
@@ -170,7 +189,7 @@ exports.getItensCompras = (req, res, next) => {
       idCompra: req.params.compraId
     }
   }).then(itens => {
-    res.render('compra/listaItens', {
+    res.json({
       linkAtivo: 'compras',
       itens: itens
     });

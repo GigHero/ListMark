@@ -2,13 +2,20 @@ const Mercado = require('../db').Mercado;
 
 exports.postNovoMercado = (req, res, next) => {
   Mercado.create(req.body)
-    .then((mercado) => {
-      res.redirect('/mercados');
-    }).catch(console.error);
+    .then(() => {
+      res.json({
+        funcionou: true
+      });
+    }).catch(function(e) {
+      console.error(e);
+      res.json({
+        funcionou: false
+      })
+    })
 };
 
 exports.getNovoMercado = (req, res, next) => {
-  res.render('mercado/novaMercado', {
+  res.json({
     linkAtivo: 'mercados',
     formAction: '/mercados/novo',
     mercado: Mercado.build({}),
@@ -17,7 +24,7 @@ exports.getNovoMercado = (req, res, next) => {
 
 exports.getMercados = (req, res, next) => {
   Mercado.findAll().then(mercados => {
-    res.render('mercado/listaMercados', {
+    res.json({
       linkAtivo: 'mercados',
       mercados: mercados
     });
@@ -27,7 +34,7 @@ exports.getMercados = (req, res, next) => {
 exports.getEditarMercado = (req, res, next) => {
   let mercadoId = req.params.mercadoId;
   Mercado.findByPk(mercadoId).then(mercado => {
-    res.render('mercado/editarMercados', {
+    res.json({
       linkAtivo: 'mercados',
       formAction: '/mercados/editar/' + mercadoId,
       mercado: mercado
@@ -40,15 +47,29 @@ exports.postExcluirMercado = (req, res, next) => {
   Mercado.findByPk(mercadoId).then(mercado => {
     return mercado.destroy();
   }).then(() => {
-    res.redirect('/mercados');
-  }).catch(console.error);
+    res.json({
+      funcionou: true
+    });
+  }).catch(function(e) {
+    console.error(e);
+    res.json({
+      funcionou: false
+    })
+  })
 };
 
 exports.postEditarMercado = (req, res, next) => {
   let mercadoId = req.params.mercadoId;
   Mercado.findByPk(mercadoId).then(mercado => {
     mercado.update(req.body).then(() => {
-      res.redirect('/mercados');
-    });
-  }).catch(console.error);
+      res.json({
+        funcionou: true
+      });
+    }).catch(function(e) {
+      console.error(e);
+      res.json({
+        funcionou: false
+      })
+    })
+})
 };

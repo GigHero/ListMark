@@ -2,13 +2,20 @@ const Item = require('../db').Item;
 
 exports.postNovoItem = (req, res, next) => {
   Item.create(req.body)
-    .then((item) => {
-      res.redirect('/itens');
-    }).catch(console.error);
+    .then(() => {
+      res.json({
+        funcionou: true
+      });
+    }).catch(function(e) {
+      console.error(e);
+      res.json({
+        funcionou: false
+      })
+    })
 };
 
 exports.getNovoItem = (req, res, next) => {
-  res.render('itens/novoItem', {
+  res.json({
     linkAtivo: 'itens',
     formAction: '/itens/nova',
     item: Item.build({}),
@@ -17,7 +24,7 @@ exports.getNovoItem = (req, res, next) => {
 
 exports.getItens = (req, res, next) => {
   Item.findAll().then(itens => {
-    res.render('itens/listaItens', {
+    res.json({
       linkAtivo: 'itens',
       itens: itens
     });
@@ -27,7 +34,7 @@ exports.getItens = (req, res, next) => {
 exports.getEditarItem = (req, res, next) => {
   let itemId = req.params.itemId;
   Item.findByPk(itemId).then(item => {
-    res.render('itens/editarItens', {
+    res.json({
       linkAtivo: 'itens',
       formAction: '/itens/editar/' + itemId,
       item: item
@@ -40,15 +47,29 @@ exports.postExcluirItem = (req, res, next) => {
   Item.findByPk(itemId).then(item => {
     return item.destroy();
   }).then(() => {
-    res.redirect('/itens');
-  }).catch(console.error);
+    res.json({
+      funcionou: true
+    });
+  }).catch(function(e) {
+    console.error(e);
+    res.json({
+      funcionou: false
+    })
+  })
 };
 
 exports.postEditarItem = (req, res, next) => {
   let itemId = req.params.itemId;
   Item.findByPk(itemId).then(item => {
     item.update(req.body).then(() => {
-      res.redirect('/itens');
-    });
-  }).catch(console.error);
-};
+      res.json({
+        funcionou: true
+      });
+    }).catch(function(e) {
+      console.error(e);
+      res.json({
+        funcionou: false
+      })
+    })
+  })
+}

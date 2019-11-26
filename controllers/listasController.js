@@ -2,13 +2,20 @@ const Lista = require('../db').Lista;
 
 exports.postNovaLista = (req, res, next) => {
   Lista.create(req.body)
-    .then((lista) => {
-      res.redirect('/listas');
-    }).catch(console.error);
+    .then(() => {
+      res.json({
+        funcionou: true
+      });
+    }).catch(function(e) {
+      console.error(e);
+      res.json({
+        funcionou: false
+      })
+    })
 };
 
 exports.getNovaLista = (req, res, next) => {
-  res.render('lista/novaLista', {
+  res.json({
     linkAtivo: 'lista',
     formAction: '/listas/nova',
     lista: Lista.build({}),
@@ -17,7 +24,7 @@ exports.getNovaLista = (req, res, next) => {
 
 exports.getListas = (req, res, next) => {
   Lista.findAll().then(listas => {
-    res.render('lista/listaListas', {
+    res.json({
       linkAtivo: 'listas',
       listas: listas
     });
@@ -27,7 +34,7 @@ exports.getListas = (req, res, next) => {
 exports.getEditarLista = (req, res, next) => {
   let listaId = req.params.listaId;
   Lista.findByPk(listaId).then(lista => {
-    res.render('lista/editarListas', {
+    res.json({
       linkAtivo: 'listas',
       formAction: '/listas/editar/' + listaId,
       lista: lista
@@ -40,15 +47,29 @@ exports.postExcluirLista = (req, res, next) => {
   Lista.findByPk(listaId).then(lista => {
     return lista.destroy();
   }).then(() => {
-    res.redirect('/listas');
-  }).catch(console.error);
+    res.json({
+      funcionou: true
+    });
+  }).catch(function(e) {
+    console.error(e);
+    res.json({
+      funcionou: false
+    })
+  })
 };
 
 exports.postEditarLista = (req, res, next) => {
   let listaId = req.params.listaId;
   Lista.findByPk(listaId).then(lista => {
     lista.update(req.body).then(() => {
-      res.redirect('/listas');
-    });
-  }).catch(console.error);
+      res.json({
+        funcionou: true
+      });
+    }).catch(function(e) {
+      console.error(e);
+      res.json({
+        funcionou: false
+      })
+    })
+})
 };
